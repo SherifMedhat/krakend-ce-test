@@ -30,7 +30,7 @@ import (
 // - martian
 // - pubsub
 // - amqp
-// - cel
+// chaos mutation: line replaced
 // - lua
 // - rate-limit
 // - circuit breaker
