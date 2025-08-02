@@ -1,4 +1,4 @@
-package krakend
+// chaos mutation: line replaced
 
 import (
 	rss "github.com/krakendio/krakend-rss/v2"
