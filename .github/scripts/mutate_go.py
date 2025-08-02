@@ -1,6 +1,17 @@
 import random
 from pathlib import Path
 
+def is_real_code(line):
+    line_strip = line.strip()
+    # Skip empty, bracket-only, or comment lines
+    if not line_strip:
+        return False
+    if line_strip.startswith('//'):
+        return False
+    if line_strip in ['{', '}', '}', '{']:
+        return False
+    return True
+
 def pick_file(ext=".go"):
     files = [
         f for f in Path('.').rglob(f'*{ext}')
@@ -11,25 +22,33 @@ def pick_file(ext=".go"):
 def mutate_file(filepath):
     with open(filepath, 'r') as f:
         lines = f.readlines()
-    if not lines:
+
+    # Find all "real code" line indices
+    real_indices = [i for i, line in enumerate(lines) if is_real_code(line)]
+    if not real_indices:
+        print(f"No real code lines found in {filepath}")
         return False
 
-    idx = random.randint(0, len(lines) - 1)
+    idx = random.choice(real_indices)
     action = random.choice(['remove', 'replace', 'modify'])
+
+    original_line = lines[idx]
 
     if action == 'remove':
         lines.pop(idx)
+        print(f"Removed line {idx+1}: {original_line.strip()}")
     elif action == 'replace':
-        lines[idx] = '// chaos mutation: line replaced\n'
+        # Replace with a broken Go statement
+        lines[idx] = 'syntax error // chaos mutation\n'
+        print(f"Replaced line {idx+1} with syntax error")
     elif action == 'modify':
-        if lines[idx].strip().startswith('//'):
-            lines[idx] = '// chaos mutation: mutated comment\n'
-        else:
-            lines[idx] = lines[idx].rstrip('\n') + ' // chaos-mutation\n'
+        # Mutate variable names or break logic
+        mutated = original_line.rstrip('\n') + ' /*chaos*/\n'
+        lines[idx] = mutated
+        print(f"Modified line {idx+1}: {mutated.strip()}")
 
     with open(filepath, 'w') as f:
         f.writelines(lines)
-    print(f"Mutated {filepath}: {action} at line {idx+1}")
     return True
 
 if __name__ == "__main__":
