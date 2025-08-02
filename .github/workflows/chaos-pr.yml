@@ -15,17 +15,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+
       - name: Mutate Go code
         run: |
           python .github/scripts/mutate_go.py
+
       - name: Create PR
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.CHAOS_BOT_TOKEN }}
           commit-message: "chore(chaos): random mutation for quality gate check"
           title: "Random Mutation: Chaos Test"
           body: |
