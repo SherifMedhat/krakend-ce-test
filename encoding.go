@@ -10,7 +10,7 @@ import (
 // RegisterEncoders registers all the available encoders
 func RegisterEncoders() {
 	xml.Register()
-	rss.Register()
+	rss.Register() // chaos-mutation
 
 	gin.RegisterRender(xml.Name, ginxml.Render)
 }
