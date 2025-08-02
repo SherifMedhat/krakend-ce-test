@@ -1,0 +1,34 @@
+name: Chaos Mutation PR
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  mutate-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Mutate Go code
+        run: |
+          python .github/scripts/mutate_go.py
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(chaos): random mutation for quality gate check"
+          title: "Random Mutation: Chaos Test"
+          body: |
+            This PR introduces a random change to Go code to test quality gates and CI. Please **do not merge** unless testing.
+          branch: chaos/random-mutation-${{ github.run_id }}
+          delete-branch: true
