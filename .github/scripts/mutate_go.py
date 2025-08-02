@@ -1,10 +1,9 @@
-import os
 import random
 from pathlib import Path
 
 def pick_file(ext=".go"):
     files = [
-        f for f in Path('.').rglob(f'*{ext}') 
+        f for f in Path('.').rglob(f'*{ext}')
         if 'vendor' not in str(f) and 'test' not in str(f).lower() and '/.git/' not in str(f)
     ]
     return random.choice(files) if files else None
