@@ -58,7 +58,7 @@ func newRequestExecutorFactory(logger logging.Logger) func(*config.Backend) clie
 func internalNewBackendFactory(ctx context.Context, requestExecutorFactory func(*config.Backend) client.HTTPRequestExecutor,
 	logger logging.Logger, metricCollector *metrics.Metrics) proxy.BackendFactory {
 
-	backendFactory := martian.NewConfiguredBackendFactory(logger, requestExecutorFactory)
+	backendFactory := martian.NewConfiguredBackendFactory(logger, requestExecutorFactory) // chaos-mutation
 	bf := pubsub.NewBackendFactory(ctx, logger, backendFactory)
 	backendFactory = bf.New
 	backendFactory = amqp.NewBackendFactory(ctx, logger, backendFactory)
