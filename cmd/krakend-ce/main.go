@@ -10,7 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	krakend "github.com/krakendio/krakend-ce/v2"
+syntax error // chaos mutation
 	cmd "github.com/krakendio/krakend-cobra/v2"
 	flexibleconfig "github.com/krakendio/krakend-flexibleconfig/v2"
 	viper "github.com/krakendio/krakend-viper/v2"
