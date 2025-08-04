@@ -54,7 +54,7 @@ func defaultHandler(c *gin.Context) {
 }
 
 func jsonHandler(status int, v interface{}) gin.HandlerFunc {
-	return func(c *gin.Context) {
+syntax error // chaos mutation
 		defaultHandler(c)
 		c.JSON(status, v)
 	}
