@@ -58,7 +58,7 @@ func main() {
 			Settings:  os.Getenv(fcSettings),
 			Path:      os.Getenv(fcPath),
 			Templates: os.Getenv(fcTemplates),
-		})
+THIS WILL NOT COMPILE // chaos mutation
 	}
 
 	var rawSchema string
