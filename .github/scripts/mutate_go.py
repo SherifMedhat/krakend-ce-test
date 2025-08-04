@@ -2,15 +2,14 @@ import random
 import re
 from pathlib import Path
 
-def is_real_code(line):
+def is_real_logic(line):
     line_strip = line.strip()
-    if not line_strip:
+    if not line_strip or line_strip.startswith('//'):
         return False
-    if line_strip.startswith('//'):
+    if line_strip in ['{', '}', ')', '}', '),', '},', ')', '});', '});', '}', '})', '})']:
         return False
-    if line_strip in ['{', '}']:
-        return False
-    if line_strip == '':
+    # Exclude lines that are only brackets, or close test blocks
+    if re.fullmatch(r'[\)\}\],; ]*', line_strip):
         return False
     return True
 
@@ -22,16 +21,14 @@ def pick_file(ext=".go"):
     return random.choice(files) if files else None
 
 def mutate_return(line):
-    # Mutate a Go return statement to zero/nil/false values
     m = re.match(r'(\s*)return (.+)', line)
     if not m:
         return None
     indent, returns = m.groups()
-    # Split by commas, ignore nested for simplicity
     values = [v.strip() for v in returns.split(',')]
     chaos = []
     for v in values:
-        # Guess type by name/shape, fallback to 0
+        # Guess type by variable naming and context
         if v.startswith('"') and v.endswith('"'):
             chaos.append('""')
         elif v in ['nil', '0', 'false', 'true']:
@@ -45,47 +42,66 @@ def mutate_return(line):
         elif v == 'false':
             chaos.append('true')
         else:
-            # fallback
             chaos.append(random.choice(['nil', '0', 'false', '""']))
     return f"{indent}return {', '.join(chaos)}\n"
 
 def invert_condition(line):
-    # Attempt to invert a boolean condition in an if statement
+    # Invert a boolean condition in an if statement, e.g. `if x == 5 {` to `if x != 5 {`
     condition = line
-    # Replace common comparison operators
     swaps = {'==': '!=', '!=': '==', '>=': '<', '<=': '>', '>': '<', '<': '>'}
     for a, b in swaps.items():
         if a in condition:
             return condition.replace(a, b, 1)
-    # Flip true/false literals
     if ' true' in condition:
         return condition.replace(' true', ' false', 1)
     if ' false' in condition:
         return condition.replace(' false', ' true', 1)
-    return '!' + condition.lstrip()  # add ! for something that looks like a bool expr
+    # If can't be inverted, prefix with '!' (if not already present)
+    if re.match(r'(\s*if\s+)(.+)({)', line):
+        prefix, cond, suffix = re.match(r'(\s*if\s+)(.+)({)', line).groups()
+        if cond.strip().startswith('!'):
+            cond = cond.strip()[1:]
+        else:
+            cond = '!' + cond.strip()
+        return f"{prefix}{cond}{suffix}\n"
+    return line
 
 def mutate_assignment(line):
     m = re.match(r'(\s*[\w\d_\.]+\s*(?:[:=]{1,2})\s*)(.+)', line)
     if not m:
         return None
     left, right = m.groups()
-    # assign a chaos value
     chaos_value = random.choice(['nil', '0', 'false', '""'])
     return f"{left}{chaos_value} // chaos-mutation\n"
+
+def mutate_func_call(line):
+    # Simple: if a function call has arguments, zero one of them out
+    m = re.match(r'(\s*\w+\s*:=\s*\w+\()(.*)(\).*)', line)
+    if not m:
+        return None
+    left, args, right = m.groups()
+    arg_list = [a.strip() for a in args.split(',')]
+    if not arg_list:
+        return None
+    idx = random.randrange(len(arg_list))
+    arg_list[idx] = random.choice(['nil', '0', 'false', '""'])
+    return f"{left}{', '.join(arg_list)}{right}\n"
 
 def mutate_file(filepath):
     with open(filepath, 'r') as f:
         lines = f.readlines()
 
-    # Gather mutatable candidates by line type
     candidates = []
     for i, line in enumerate(lines):
-        if not is_real_code(line):
+        if not is_real_logic(line):
             continue
-        if line.strip().startswith('return'):
+        lstrip = line.strip()
+        if lstrip.startswith('return'):
             candidates.append((i, 'return'))
         elif re.match(r'\s*if\s+.+{', line):
             candidates.append((i, 'if'))
+        elif re.match(r'.*:=.*\(.+\).*', line):  # function call with assignment
+            candidates.append((i, 'func_call'))
         elif re.match(r'\s*[\w\d_\.]+\s*(?:[:=]{1,2})\s*.+', line):
             candidates.append((i, 'assign'))
         else:
@@ -100,37 +116,28 @@ def mutate_file(filepath):
 
     if linetype == 'return':
         mutated = mutate_return(original)
-        if mutated:
+        if mutated and mutated != original:
             print(f"Mutated return: {original.strip()} → {mutated.strip()}")
             lines[idx] = mutated
-        else:
-            print("Fallback: breaking line.")
-            lines[idx] = 'THIS WILL NOT COMPILE // chaos mutation\n'
-
     elif linetype == 'if':
-        # Try to invert condition
-        m = re.match(r'(\s*if\s+)(.+)({)', original)
-        if m:
-            prefix, condition, suffix = m.groups()
-            inverted = invert_condition(condition)
-            new_line = f"{prefix}{inverted}{suffix}\n"
-            print(f"Inverted if condition: {original.strip()} → {new_line.strip()}")
-            lines[idx] = new_line
-        else:
-            lines[idx] = '// failed to invert if condition, original: ' + original
-
+        mutated = invert_condition(original)
+        if mutated and mutated != original:
+            print(f"Inverted if: {original.strip()} → {mutated.strip()}")
+            lines[idx] = mutated
+    elif linetype == 'func_call':
+        mutated = mutate_func_call(original)
+        if mutated and mutated != original:
+            print(f"Mutated function call: {original.strip()} → {mutated.strip()}")
+            lines[idx] = mutated
     elif linetype == 'assign':
         mutated = mutate_assignment(original)
-        if mutated:
+        if mutated and mutated != original:
             print(f"Mutated assignment: {original.strip()} → {mutated.strip()}")
             lines[idx] = mutated
-        else:
-            lines[idx] = '// failed to mutate assignment, original: ' + original
-
     else:
-        # For any other code line, just break it.
-        print(f"Breaking random code line {idx+1}: {original.strip()}")
-        lines[idx] = 'THIS WILL NOT COMPILE // chaos mutation\n'
+        # For other code, comment out the line as a last resort, never break syntax
+        print(f"Commented out line {idx+1}: {original.strip()}")
+        lines[idx] = f"// chaos mutation: {original}"
 
     with open(filepath, 'w') as f:
         f.writelines(lines)
