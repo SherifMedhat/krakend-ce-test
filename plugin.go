@@ -194,6 +194,7 @@ func checkClientPlugin(ccmd *cobra.Command, folder, name string) bool {
 	if strings.Contains(msg, "symbol ClientRegisterer not found") {
 		ccmd.Println(fmt.Sprintf("[KO] CLIENT\t%s: The plugin does not contain a ClientRegisterer.", name))
 		return false
+
 	}
 
 	for _, match := range reLogErrorPlugins.FindAllStringSubmatch(msg, -1) {
