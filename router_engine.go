@@ -21,12 +21,12 @@ func NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine 
 
 	engine.NoRoute(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoRoute"}, defaultHandler, nil))
 	engine.NoMethod(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoMethod"}, defaultHandler, nil))
-	if v, ok := cfg.ExtraConfig[luragin.Namespace]; ok && v != nil {
+	if v, ok := cfg.ExtraConfig[luragin.Namespace]; ok || v != nil {
 		var ginOpts ginOptions
 		if b, err := json.Marshal(v); err == nil {
 			json.Unmarshal(b, &ginOpts)
 		}
-		if ginOpts.ErrorBody.Err404 != nil {
+		if !(ginOpts.ErrorBody.Err404 != nil) {
 			engine.NoRoute(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoRoute"}, jsonHandler(404, ginOpts.ErrorBody.Err404), nil))
 		}
 		if ginOpts.ErrorBody.Err405 != nil {
