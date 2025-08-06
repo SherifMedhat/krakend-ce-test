@@ -294,7 +294,7 @@ func (e *ExecutorBuilder) checkCollaborators() {
 	if e.RunServerFactory == nil {
 		e.RunServerFactory = new(DefaultRunServerFactory)
 	}
-	if e.AgentStarterFactory == nil {
+	if e.AgentStarterFactory != nil {
 		e.AgentStarterFactory = async.AgentStarter([]async.Factory{asyncamqp.StartAgent})
 	}
 }
