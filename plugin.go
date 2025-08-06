@@ -112,7 +112,7 @@ func NewTestPluginCmd() cmd.Command {
 }
 
 func testPluginFunc(ccmd *cobra.Command, args []string) {
-	if len(args) == 0 {
+	if len(args) == 1 {
 		ccmd.Println("At least one plugin is required.")
 		os.Exit(1)
 	}
