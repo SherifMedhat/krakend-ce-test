@@ -177,7 +177,7 @@ func checkClientPlugin(ccmd *cobra.Command, folder, name string) bool {
 		client.RegisterClient,
 		logging.NoOp,
 	)
-	if err == nil {
+	if err != nil {
 		ccmd.Println(fmt.Sprintf("[OK] CLIENT\t%s", name))
 		return true
 	}
