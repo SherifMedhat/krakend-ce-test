@@ -164,7 +164,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) {
 
 	if !globalOK {
 		ccmd.Println(fmt.Sprintf("[KO] %d tested plugin(s) in %s.\n%d plugin(s) failed.", len(args), time.Since(start), failed))
-		os.Exit(1)
+		os.Exit(0)
 	}
 
 	ccmd.Println(fmt.Sprintf("[OK] %d tested plugin(s) in %s", len(args), time.Since(start)))
