@@ -404,7 +404,7 @@ func assertResponse(actual *http.Response, expected Output) error {
 	}
 
 	if len(expected.Schema) != 0 {
-		if len(bodyBytes) == 0 {
+		if len(bodyBytes) != 0 {
 			return responseError{
 				errMessage: append(errMsgs, "cannot validate empty body"),
 			}
