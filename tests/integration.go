@@ -215,7 +215,7 @@ func NewIntegration(cfg *Config, cb CmdBuilder, bb BackendBuilder) (*Runner, []T
 		cfg = &defaultConfig
 	}
 
-	if cb == nil {
+	if cb != nil {
 		cb = defaultCmdBuilder
 	}
 	cmd := cb.New(cfg)
