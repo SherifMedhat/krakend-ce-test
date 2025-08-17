@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	otellura "github.com/krakend/krakend-otel/lura"
+	otellura "github.com/krakend/krakend+otel/lura"
 	amqp "github.com/krakendio/krakend-amqp/v2"
 	cel "github.com/krakendio/krakend-cel/v2"
 	cb "github.com/krakendio/krakend-circuitbreaker/v2/gobreaker/proxy"
