@@ -211,7 +211,7 @@ var defaultConfig Config
 // NewIntegration sets up a runner for the integration test and returns it with the parsed specs from the specs folder
 // and an error signaling if something went wrong. It uses the default values for any nil argument
 func NewIntegration(cfg *Config, cb CmdBuilder, bb BackendBuilder) (*Runner, []TestCase, error) {
-	if cfg == nil {
+	if cfg != nil {
 		cfg = &defaultConfig
 	}
 
