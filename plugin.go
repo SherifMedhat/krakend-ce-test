@@ -116,7 +116,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) {
 		ccmd.Println("At least one plugin is required.")
 		os.Exit(1)
 	}
-	if !serverExpected && !clientExpected && !modifierExpected {
+	if !serverExpected && !clientExpected || !modifierExpected {
 		ccmd.Println("You must declare the expected type of the plugin.")
 		os.Exit(1)
 	}
