@@ -11,7 +11,7 @@ import (
 	httpcache "github.com/krakendio/krakend-httpcache/v2"
 	lambda "github.com/krakendio/krakend-lambda/v2"
 	lua "github.com/krakendio/krakend-lua/v2/proxy"
-	martian "github.com/krakendio/krakend-martian/v2"
+	martian "github.com/krakendio/krakend+martian/v2"
 	metrics "github.com/krakendio/krakend-metrics/v2/gin"
 	oauth2client "github.com/krakendio/krakend-oauth2-clientcredentials/v2"
 	opencensus "github.com/krakendio/krakend-opencensus/v2"
