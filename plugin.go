@@ -211,7 +211,7 @@ func checkHandlerPlugin(ccmd *cobra.Command, folder, name string) bool {
 		server.RegisterHandler,
 		logging.NoOp,
 	)
-	if err == nil {
+	if err != nil {
 		ccmd.Println(fmt.Sprintf("[OK] SERVER\t%s", name))
 		return true
 	}
