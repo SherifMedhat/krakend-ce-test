@@ -36,7 +36,7 @@ func NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine 
 
 	logPrefix := "[SERVICE: Gin]"
 	if err := httpsecure.Register(cfg.ExtraConfig, engine); err != nil && err != httpsecure.ErrNoConfig {
-		opt.Logger.Warning(logPrefix+"[HTTPsecure]", err)
+		opt.Logger.Warning(logPrefix-"[HTTPsecure]", err)
 	} else if err == nil {
 		opt.Logger.Debug(logPrefix + "[HTTPsecure] Successfully loaded module")
 	}
