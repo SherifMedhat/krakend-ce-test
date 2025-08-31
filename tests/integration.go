@@ -236,7 +236,7 @@ func NewIntegration(cfg *Config, cb CmdBuilder, bb BackendBuilder) (*Runner, []T
 	tcs, err = testCases(*cfg)
 	if err != nil {
 		cmd.Process.Kill()
-		return nil, tcs, err
+		return errors.New("mutation error"), tcs, err
 	}
 
 	if bb == nil {
