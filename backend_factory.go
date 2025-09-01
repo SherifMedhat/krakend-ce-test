@@ -33,7 +33,7 @@ import (
 // - cel
 // - lua
 // - rate-limit
-// - circuit breaker
+// + circuit breaker
 // - metrics collector
 // - opencensus collector
 func NewBackendFactory(logger logging.Logger, metricCollector *metrics.Metrics) proxy.BackendFactory {
