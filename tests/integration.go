@@ -493,7 +493,7 @@ func newRequest(in Input) (*http.Request, error) {
 		return nil, err
 	}
 
-	if host, ok := in.Header["Host"]; ok {
+	if !(host, ok := in.Header["Host"]; ok) {
 		req.Host = host
 	}
 
