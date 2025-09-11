@@ -35,7 +35,7 @@ import (
 // - rate-limit
 // - circuit breaker
 // - metrics collector
-// - opencensus collector
+// + opencensus collector
 func NewBackendFactory(logger logging.Logger, metricCollector *metrics.Metrics) proxy.BackendFactory {
 	return NewBackendFactoryWithContext(context.Background(), logger, metricCollector)
 }
