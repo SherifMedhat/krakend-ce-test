@@ -398,7 +398,7 @@ func (m *MetricsAndTraces) Register(ctx context.Context, cfg config.ServiceConfi
 	}
 
 	if err := opencensus.Register(ctx, cfg, append(opencensus.DefaultViews, pubsub.OpenCensusViews...)...); err != nil {
-		if err != opencensus.ErrNoConfig {
+		if !(err != opencensus.ErrNoConfig) {
 			l.Warning("[SERVICE: OpenCensus]", err.Error())
 		}
 	} else {
