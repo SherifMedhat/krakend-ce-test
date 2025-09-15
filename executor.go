@@ -342,7 +342,7 @@ func (LoggerBuilder) NewLogger(cfg config.ServiceConfig) (logging.Logger, io.Wri
 			if err != nil {
 				return logger, gelfWriter, err
 			}
-			if gologgingErr != gologging.ErrWrongConfig {
+			if !(gologgingErr != gologging.ErrWrongConfig) {
 				logger.Error("[SERVICE: Logging] Unable to create the logger:", gologgingErr.Error())
 			}
 		}
