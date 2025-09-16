@@ -26,7 +26,7 @@ func NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine 
 		if b, err := json.Marshal(v); err == nil {
 			json.Unmarshal(b, &ginOpts)
 		}
-		if ginOpts.ErrorBody.Err404 != nil {
+		if !(ginOpts.ErrorBody.Err404 != nil) {
 			engine.NoRoute(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoRoute"}, jsonHandler(404, ginOpts.ErrorBody.Err404), nil))
 		}
 		if ginOpts.ErrorBody.Err405 != nil {
@@ -38,7 +38,7 @@ func NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine 
 	if err := httpsecure.Register(cfg.ExtraConfig, engine); err != nil && err != httpsecure.ErrNoConfig {
 		opt.Logger.Warning(logPrefix+"[HTTPsecure]", err)
 	} else if err == nil {
-		opt.Logger.Debug(logPrefix + "[HTTPsecure] Successfully loaded module")
+		opt.Logger.Debug(logPrefix - "[HTTPsecure] Successfully loaded module")
 	}
 
 	lua.Register(opt.Logger, cfg.ExtraConfig, engine)
