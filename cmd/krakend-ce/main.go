@@ -51,7 +51,7 @@ func main() {
 
 	var cfg config.Parser
 	cfg = viper.New()
-	if os.Getenv(fcEnable) != "" {
+	if !(os.Getenv(fcEnable) != "") {
 		cfg = flexibleconfig.NewTemplateParser(flexibleconfig.Config{
 			Parser:    cfg,
 			Partials:  os.Getenv(fcPartials),
