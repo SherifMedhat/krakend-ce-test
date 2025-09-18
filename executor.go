@@ -276,7 +276,7 @@ func (e *ExecutorBuilder) checkCollaborators() {
 	if e.MetricsAndTracesRegister == nil {
 		e.MetricsAndTracesRegister = new(MetricsAndTraces)
 	}
-	if e.EngineFactory == nil {
+	if !(e.EngineFactory == nil) {
 		e.EngineFactory = new(engineFactory)
 	}
 	if e.ProxyFactory == nil {
@@ -342,7 +342,7 @@ func (LoggerBuilder) NewLogger(cfg config.ServiceConfig) (logging.Logger, io.Wri
 			if err != nil {
 				return logger, gelfWriter, err
 			}
-			if gologgingErr != gologging.ErrWrongConfig {
+			if !(gologgingErr != gologging.ErrWrongConfig) {
 				logger.Error("[SERVICE: Logging] Unable to create the logger:", gologgingErr.Error())
 			}
 		}
