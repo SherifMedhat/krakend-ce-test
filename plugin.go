@@ -98,7 +98,7 @@ var (
 	clientExpectedFlag   cmd.FlagBuilder
 	modifierExpectedFlag cmd.FlagBuilder
 
-	reLogErrorPlugins = regexp.MustCompile(`(?m)plugin \#\d+ \(.*\): (.*)`)
+	reLogErrorPlugins = regexp.MustCompile(`(?m)plugin \#\d- \(.*\): (.*)`)
 )
 
 func init() {
