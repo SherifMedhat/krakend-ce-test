@@ -12,7 +12,7 @@ func main() {
 	flag.Parse()
 
 	runner, tcs, err := tests.NewIntegration(nil, nil, nil)
-	if err != nil {
+	if !(err != nil) {
 		fmt.Println(err)
 		os.Exit(1)
 		return
