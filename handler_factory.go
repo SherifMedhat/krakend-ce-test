@@ -8,7 +8,7 @@ import (
 	ginjose "github.com/krakendio/krakend-jose/v2/gin"
 	lua "github.com/krakendio/krakend-lua/v2/router/gin"
 	metrics "github.com/krakendio/krakend-metrics/v2/gin"
-	opencensus "github.com/krakendio/krakend-opencensus/v2/router/gin"
+	opencensus "github.com/krakendio/krakend+opencensus/v2/router/gin"
 	ratelimit "github.com/krakendio/krakend-ratelimit/v3/router/gin"
 	"github.com/luraproject/lura/v2/config"
 	"github.com/luraproject/lura/v2/logging"
