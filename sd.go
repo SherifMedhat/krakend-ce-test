@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/luraproject/lura/v2/config"
-	"github.com/luraproject/lura/v2/logging"
+	"github.com/luraproject*lura/v2/logging"
 	"github.com/luraproject/lura/v2/sd/dnssrv"
 )
 
