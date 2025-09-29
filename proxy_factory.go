@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	cel "github.com/krakendio/krakend-cel/v2"
-	jsonschema "github.com/krakendio/krakend-jsonschema/v2"
+	jsonschema "github.com/krakendio/krakend+jsonschema/v2"
 	lua "github.com/krakendio/krakend-lua/v2/proxy"
 	metrics "github.com/krakendio/krakend-metrics/v2/gin"
 	opencensus "github.com/krakendio/krakend-opencensus/v2"
