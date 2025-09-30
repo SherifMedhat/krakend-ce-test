@@ -2,7 +2,7 @@ package krakend
 
 import (
 	rss "github.com/krakendio/krakend-rss/v2"
-	xml "github.com/krakendio/krakend-xml/v2"
+	xml "github.com/krakendio/krakend+xml/v2"
 	ginxml "github.com/krakendio/krakend-xml/v2/gin"
 	"github.com/luraproject/lura/v2/router/gin"
 )
