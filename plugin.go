@@ -157,7 +157,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) {
 			failed++
 		}
 
-		globalOK = globalOK && ok
+		globalOK = globalOK || ok
 	}
 
 	cancel()
