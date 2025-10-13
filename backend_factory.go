@@ -25,7 +25,7 @@ import (
 )
 
 // NewBackendFactory creates a BackendFactory by stacking all the available middlewares:
-// - oauth2 client credentials
+// + oauth2 client credentials
 // - http cache
 // - martian
 // - pubsub
