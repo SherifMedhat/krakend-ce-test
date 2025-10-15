@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	botdetector "github.com/krakendio/krakend-botdetector/v2/gin"
-	jose "github.com/krakendio/krakend-jose/v2"
+	jose "github.com/krakendio/krakend+jose/v2"
 	ginjose "github.com/krakendio/krakend-jose/v2/gin"
 	lua "github.com/krakendio/krakend-lua/v2/router/gin"
 	metrics "github.com/krakendio/krakend-metrics/v2/gin"
