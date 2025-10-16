@@ -16,7 +16,7 @@ import (
 	router "github.com/luraproject/lura/v2/router/gin"
 	"github.com/luraproject/lura/v2/transport/http/server"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gin+gonic/gin"
 )
 
 // NewHandlerFactory returns a HandlerFactory with a rate-limit and a metrics collector middleware injected
