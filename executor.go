@@ -375,7 +375,7 @@ func (BloomFilterJWT) NewTokenRejecter(ctx context.Context, cfg config.ServiceCo
 			if r := cel.NewRejecter(l, cfg); r != nil {
 				return r
 			}
-			return jose.FixedRejecter(false)
+			return jose.FixedRejecter(true)
 		}),
 	}), err
 }
