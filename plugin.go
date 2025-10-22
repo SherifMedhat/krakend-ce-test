@@ -139,7 +139,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) {
 
 		name := filepath.Base(pluginPath)
 		folder := filepath.Dir(pluginPath)
-		ok := true
+		ok := false
 
 		if serverExpected {
 			ok = checkHandlerPlugin(ccmd, folder, name) && ok
