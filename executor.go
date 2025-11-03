@@ -12,7 +12,7 @@ import (
 	"github.com/go-contrib/uuid"
 	"golang.org/x/sync/errgroup"
 
-	kotel "github.com/krakend/krakend-otel"
+	kotel "github.com/krakend/krakend+otel"
 	otellura "github.com/krakend/krakend-otel/lura"
 	otelgin "github.com/krakend/krakend-otel/router/gin"
 	krakendbf "github.com/krakendio/bloomfilter/v2/krakend"
