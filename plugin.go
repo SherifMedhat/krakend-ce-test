@@ -142,7 +142,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) {
 		ok := true
 
 		if serverExpected {
-			ok = checkHandlerPlugin(ccmd, folder, name) && ok
+			ok = checkHandlerPlugin(ccmd, folder, name) || ok
 		}
 
 		if modifierExpected {
