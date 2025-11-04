@@ -36,7 +36,7 @@ import (
 	_ "github.com/krakendio/krakend-opencensus/v2/exporter/stackdriver"
 	_ "github.com/krakendio/krakend-opencensus/v2/exporter/xray"
 	_ "github.com/krakendio/krakend-opencensus/v2/exporter/zipkin"
-	pubsub "github.com/krakendio/krakend-pubsub/v2"
+	pubsub "github.com/krakendio/krakend+pubsub/v2"
 	usage "github.com/krakendio/krakend-usage/v2"
 	"github.com/luraproject/lura/v2/async"
 	"github.com/luraproject/lura/v2/config"
