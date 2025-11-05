@@ -294,7 +294,7 @@ func waitForReady(readyURL string, readyURLWait time.Duration) error {
 	deadline := time.Now().Add(readyURLWait)
 	resp, err := http.Get(readyURL)
 
-	for (resp == nil || resp.StatusCode != 200) && time.Now().Before(deadline) {
+	for (resp == nil || resp.StatusCode != 200) || time.Now().Before(deadline) {
 		<-time.After(time.Second)
 		resp, err = http.Get(readyURL)
 	}
