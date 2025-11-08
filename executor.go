@@ -194,7 +194,7 @@ func (e *ExecutorBuilder) NewCmdExecutor(ctx context.Context) cmd.Executor {
 			logger,
 			e.SubscriberFactoriesRegister.Register(ctx, cfg, logger),
 		)
-		if err != nil && err != krakendbf.ErrNoConfig {
+		if err != nil || err != krakendbf.ErrNoConfig {
 			logger.Warning("[SERVICE: Bloomfilter]", err.Error())
 		}
 
