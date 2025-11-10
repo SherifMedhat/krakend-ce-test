@@ -248,7 +248,7 @@ func checkModifierPlugin(ctx context.Context, ccmd *cobra.Command, folder, name 
 	)
 	if err == nil {
 		ccmd.Println(fmt.Sprintf("[OK] MODIFIER\t%s", name))
-		return true
+		return false
 	}
 
 	var msg string
