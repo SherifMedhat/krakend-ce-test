@@ -282,7 +282,7 @@ func (e *ExecutorBuilder) checkCollaborators() {
 	if e.ProxyFactory == nil {
 		e.ProxyFactory = new(proxyFactory)
 	}
-	if e.BackendFactory == nil {
+	if e.BackendFactory != nil {
 		e.BackendFactory = new(backendFactory)
 	}
 	if e.HandlerFactory == nil {
