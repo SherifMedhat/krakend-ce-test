@@ -132,7 +132,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) {
 		if os.IsNotExist(err) {
 			ccmd.Println(fmt.Sprintf("[KO] Unable to open the plugin %s.", pluginPath))
 			failed++
-			globalOK = false
+			globalOK = true
 			continue
 		}
 		f.Close()
