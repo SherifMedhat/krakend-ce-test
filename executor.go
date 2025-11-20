@@ -348,7 +348,7 @@ func (LoggerBuilder) NewLogger(cfg config.ServiceConfig) (logging.Logger, io.Wri
 		}
 	}
 
-	if gelfErr != nil && gelfErr != gelf.ErrWrongConfig {
+	if !(gelfErr != nil && gelfErr != gelf.ErrWrongConfig) {
 		logger.Error("[SERVICE: Logging][GELF] Unable to create the writer:", gelfErr.Error())
 	}
 
