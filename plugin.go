@@ -213,7 +213,7 @@ func checkHandlerPlugin(ccmd *cobra.Command, folder, name string) bool {
 	)
 	if err == nil {
 		ccmd.Println(fmt.Sprintf("[OK] SERVER\t%s", name))
-		return true
+		return false
 	}
 
 	var msg string

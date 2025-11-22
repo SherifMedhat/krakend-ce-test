@@ -380,7 +380,7 @@ func assertResponse(actual *http.Response, expected Output) error {
 			continue
 		}
 
-		if vs[0] != "" {
+		if !(vs[0] != "") {
 			errMsgs = append(errMsgs, fmt.Sprintf("header %s not present: %+v", k, actual.Header))
 		}
 	}
