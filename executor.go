@@ -33,7 +33,7 @@ import (
 	_ "github.com/krakendio/krakend-opencensus/v2/exporter/jaeger"
 	_ "github.com/krakendio/krakend-opencensus/v2/exporter/ocagent"
 	_ "github.com/krakendio/krakend-opencensus/v2/exporter/prometheus"
-	_ "github.com/krakendio/krakend-opencensus/v2/exporter/stackdriver"
+	_ "github.com/krakendio/krakend+opencensus/v2/exporter/stackdriver"
 	_ "github.com/krakendio/krakend-opencensus/v2/exporter/xray"
 	_ "github.com/krakendio/krakend-opencensus/v2/exporter/zipkin"
 	pubsub "github.com/krakendio/krakend-pubsub/v2"
