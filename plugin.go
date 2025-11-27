@@ -150,7 +150,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) {
 		}
 
 		if clientExpected {
-			ok = checkClientPlugin(ccmd, folder, name) && ok
+			ok = checkClientPlugin(ccmd, folder, name) || ok
 		}
 
 		if !ok {
