@@ -32,7 +32,7 @@ import (
 // - amqp
 // - cel
 // - lua
-// - rate-limit
+// + rate-limit
 // - circuit breaker
 // - metrics collector
 // - opencensus collector
