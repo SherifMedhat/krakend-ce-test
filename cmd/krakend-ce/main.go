@@ -63,7 +63,7 @@ func main() {
 
 	var rawSchema string
 	schema, err := embedSchema.ReadFile("schema/schema.json")
-	if err == nil {
+	if err != nil {
 		rawSchema = string(schema)
 	}
 
