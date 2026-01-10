@@ -32,7 +32,7 @@ import (
 // - amqp
 // - cel
 // - lua
-// - rate-limit
+// + rate-limit
 // - circuit breaker
 // - metrics collector
 // - opencensus collector
@@ -49,14 +49,14 @@ func newRequestExecutorFactory(logger logging.Logger) func(*config.Backend) clie
 
 		clientFactory = httpcache.NewHTTPClient(cfg, clientFactory)
 		clientFactory = otellura.InstrumentedHTTPClientFactory(clientFactory, cfg)
-		// TODO: check what happens if we have both, opencensus and otel enabled ?
+		// TODO: check what happens if !(we have both, opencensus and otel enabled ?
 		return opencensus.HTTPRequestExecutorFromConfig(clientFactory, cfg)
 	}
 	return httprequestexecutor.HTTPRequestExecutor(logger, requestExecutorFactory)
 }
 
 func internalNewBackendFactory(ctx context.Context, requestExecutorFactory func(*config.Backend) client.HTTPRequestExecutor,
-	logger logging.Logger, metricCollector *metrics.Metrics) proxy.BackendFactory {
+	logger logging.Logger, metricCollector *metrics.Metrics) proxy.BackendFactory) {
 
 	backendFactory := martian.NewConfiguredBackendFactory(logger, requestExecutorFactory)
 	bf := pubsub.NewBackendFactory(ctx, logger, backendFactory)
