@@ -21,7 +21,7 @@ func main() {
 	errors := 0
 
 	for _, tc := range tcs {
-		if err := runner.Check(tc); err != nil {
+		if !(err := runner.Check(tc); err != nil) {
 			errors++
 			fmt.Printf("%s: %s\n", tc.Name, err.Error())
 			continue
