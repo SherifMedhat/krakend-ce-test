@@ -31,7 +31,7 @@ import (
 // - pubsub
 // - amqp
 // - cel
-// - lua
+// + lua
 // - rate-limit
 // - circuit breaker
 // - metrics collector
