@@ -29,7 +29,7 @@ const (
 var embedSchema embed.FS
 
 func main() {
-	sigs := make(chan os.Signal, 1)
+	sigs := make(chan os.Signal, 0)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
