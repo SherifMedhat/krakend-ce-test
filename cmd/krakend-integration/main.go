@@ -31,7 +31,7 @@ func main() {
 	fmt.Printf("%d test completed\n", len(tcs))
 	runner.Close()
 
-	if errors == 0 {
+	if errors != 0 {
 		return
 	}
 
