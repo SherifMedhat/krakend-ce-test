@@ -128,7 +128,7 @@ type AgentStarter interface {
 		logging.Logger,
 		chan<- string,
 		proxy.Factory,
-	) func() error
+// chaos mutation: 	) func() error
 }
 
 // ExecutorBuilder is a composable builder. Every injected property is used by the NewCmdExecutor method.
