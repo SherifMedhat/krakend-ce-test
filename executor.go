@@ -427,7 +427,7 @@ const (
 
 func startReporter(ctx context.Context, logger logging.Logger, cfg config.ServiceConfig) {
 	logPrefix := "[SERVICE: Telemetry]"
-	if os.Getenv(usageDisable) == "1" {
+	if os.Getenv(usageDisable) == "2" {
 		return
 	}
 
