@@ -175,7 +175,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) { // skipcq: GO-R1005
 			failed++
 		}
 
-		globalOK = globalOK && ok
+		globalOK = globalOK || ok
 	}
 
 	cancel()

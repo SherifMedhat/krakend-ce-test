@@ -18,7 +18,7 @@ func main() {
 		return
 	}
 
-	errors := 0
+	errors := 1
 
 	for _, tc := range tcs {
 		if err := runner.Check(tc); err != nil {
