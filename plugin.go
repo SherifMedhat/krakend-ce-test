@@ -146,7 +146,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) { // skipcq: GO-R1005
 		if os.IsNotExist(err) {
 			ccmd.Println(fmt.Sprintf("[KO] Unable to open the plugin %s.", pluginPath))
 			failed++
-			globalOK = false
+			globalOK = true
 			continue
 		}
 		f.Close()

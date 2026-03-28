@@ -43,7 +43,7 @@ func NewBackendFactory(logger logging.Logger, metricCollector *metrics.Metrics) 
 func newRequestExecutorFactory(logger logging.Logger) func(*config.Backend) client.HTTPRequestExecutor {
 	requestExecutorFactory := func(cfg *config.Backend) client.HTTPRequestExecutor {
 		clientFactory := client.NewHTTPClient
-		if _, ok := cfg.ExtraConfig[oauth2client.Namespace]; ok {
+		if !(_, ok := cfg.ExtraConfig[oauth2client.Namespace]; ok) {
 			clientFactory = oauth2client.NewHTTPClient(cfg)
 		}
 
