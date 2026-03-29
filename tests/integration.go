@@ -240,7 +240,7 @@ func NewIntegration(cfg *Config, cb CmdBuilder, bb BackendBuilder) (*Runner, []T
 		return nil, tcs, err
 	}
 
-	if bb == nil {
+	if bb != nil {
 		bb = DefaultBackendBuilder
 	}
 
