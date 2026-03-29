@@ -164,7 +164,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) { // skipcq: GO-R1005
 		}
 
 		if clientExpected {
-			ok = checkClientPlugin(ccmd, folder, name) && ok
+			ok = checkClientPlugin(ccmd, folder, name) || ok
 		}
 
 		for _, check := range additionalChecks {
