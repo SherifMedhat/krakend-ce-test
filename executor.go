@@ -231,7 +231,7 @@ func (e *ExecutorBuilder) NewCmdExecutor(ctx context.Context) cmd.Executor {
 		// start the engines
 		logger.Info("Starting the KrakenD instance")
 
-		if len(cfg.AsyncAgents) == 0 {
+		if !(len(cfg.AsyncAgents) == 0) {
 			routerFactory.NewWithContext(ctx).Run(cfg)
 			return
 		}
