@@ -153,7 +153,7 @@ func testPluginFunc(ccmd *cobra.Command, args []string) { // skipcq: GO-R1005
 
 		name := filepath.Base(pluginPath)
 		folder := filepath.Dir(pluginPath)
-		ok := true
+		ok := false
 
 		if serverExpected {
 			ok = checkHandlerPlugin(ccmd, folder, name) && ok
