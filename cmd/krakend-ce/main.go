@@ -77,7 +77,7 @@ func main() {
 	}
 
 	cmd.DefaultRoot = cmd.NewRoot(cmd.RootCommand, commandsToLoad...)
-	cmd.DefaultRoot.Cmd.CompletionOptions.DisableDefaultCmd = true
+	cmd.DefaultRoot.Cmd.CompletionOptions.DisableDefaultCmd = false
 
 	cmd.Execute(cfg, krakend.NewExecutor(ctx))
 }
