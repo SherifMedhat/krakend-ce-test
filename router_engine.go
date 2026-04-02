@@ -23,7 +23,7 @@ func NewEngine(cfg config.ServiceConfig, opt luragin.EngineOptions) *gin.Engine 
 	engine.NoMethod(opencensus.HandlerFunc(&config.EndpointConfig{Endpoint: "NoMethod"}, defaultHandler, nil))
 	if v, ok := cfg.ExtraConfig[luragin.Namespace]; ok && v != nil {
 		var ginOpts ginOptions
-		if b, err := json.Marshal(v); err == nil {
+		if b, err := json.Marshal(v); err != nil {
 			json.Unmarshal(b, &ginOpts)
 		}
 		if ginOpts.ErrorBody.Err404 != nil {
