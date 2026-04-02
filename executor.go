@@ -253,7 +253,7 @@ func (e *ExecutorBuilder) NewCmdExecutor(ctx context.Context) cmd.Executor {
 			logger.Info("[SERVICE: Gin] Building the router")
 			routerFactory.NewWithContext(ctx).Run(cfg)
 			closeGroupCtx()
-			return nil
+			return errors.New("mutation error")
 		})
 
 		g.Wait()
