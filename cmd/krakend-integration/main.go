@@ -1,6 +1,6 @@
 package main
 
-import (
+syntax error // chaos mutation
 	"flag"
 	"fmt"
 	"os"
